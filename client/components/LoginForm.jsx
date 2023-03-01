@@ -2,26 +2,47 @@ import React from 'react';
 
 const LoginForm = props => {
 
-  // useEffect(() => {
-  //   fetch('/api/test')
-  //     .then(response => response.json())
-  //     .then(data => console.log('hurray!'))
-  //     .catch(error => console.log(error));
-  // }, []);
+  const errorMsg = props.showError ? <div id="login-error-msg" className="error-msg">Invalid username and/or password.</div> : null;
 
   return (
-    <div id="login-form">
+    <div id="login-form" className="signupLoginForm">
       <h1>Log In</h1>
-      <form>
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" required />
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required />
-        <button type="submit">Log in</button>
+      <form autoComplete="off">
+        <label htmlFor="email">Email</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          required />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required />
+        <button
+          id="loginBtn"
+          type="submit"
+          onClick={(event) => {
+            event.preventDefault();
+
+            const email = document.querySelector('#email').value;
+            const pw = document.querySelector('#password').value;
+
+            props.onLoginBtnClick(email, pw)
+          }
+          }>
+          Log in
+        </button>
       </form>
+      {errorMsg}
       <div id="no-account">
         Don't have an account?
-        <span id="sign-up">Sign Up!</span>
+        <span
+          id="sign-up"
+          onClick={() => props.onSignupLinkClick()}>
+          Sign Up!
+        </span>
       </div>
     </div>
   )
