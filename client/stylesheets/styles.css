@@ -32,6 +32,11 @@ button {
   margin-top: 10rem;
 }
 
+#logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+}
+
 #no-account {
   margin-top: 2rem;
 }

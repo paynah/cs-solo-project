@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import LoginForm from './components/LoginForm.jsx';
+import Header from './components/Header.jsx';
 
 const App = () => {
 
@@ -11,7 +12,10 @@ const App = () => {
   // }, []);
 
   return (
-    <div><LoginForm /></div>
+    <div>
+      <Header />
+      <LoginForm />
+    </div>
   )
 };
 
