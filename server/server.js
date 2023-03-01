@@ -8,7 +8,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-
+app.get('/api/test', (req, res) => {
+  return res.status(200).json({"result": "you got it!"});
+})
 
 // statically serve everything in the build folder on the route '/build'
 app.use('/build', express.static(path.join(__dirname, '../build')));
@@ -19,7 +21,9 @@ app.get('/', (req, res) => {
 });
 
 // Catch-all route handler for requests to an unknown route
-app.use((req, res) => res.status(404).send('🫠'));
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, '404.html'))
+});
 
 
 app.listen(PORT);

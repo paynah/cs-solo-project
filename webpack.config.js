@@ -9,7 +9,7 @@ module.exports = {
     filename: 'bundle.js'
   },
 
-  mode: 'production',
+  mode: 'development',
 
   module: {
     rules: [
@@ -38,13 +38,13 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'vacation.io',
-      template: 'index.html'
+      template: './index.html'
     })
   ],
 
   devServer: {
     static: {
-      publicPath: '/',
+      publicPath: '/build',
       directory: path.resolve(__dirname, 'build')
     },
     port: 8080,
@@ -52,5 +52,7 @@ module.exports = {
     proxy: {
       '/api': 'http://localhost:3000'
     }
-  }
+  },
+
+  devtool: false
 };
