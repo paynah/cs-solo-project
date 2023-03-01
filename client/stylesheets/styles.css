@@ -1,4 +1,44 @@
 body {
-  background-color: rgb(0, 119, 255);
-  font-family: 'DM Serif Display', serif;
+  background-color: rgb(216, 216, 216);
+  /* font-family: 'DM Serif Display', serif; */
+  font-family: 'DM Sans', sans-serif;
+}
+
+input {
+  display: block;
+  margin-bottom: 0.5rem;
+  padding-left: 0.6rem;
+  width: 20rem;
+  height: 2.5rem;
+  border: 1px solid rgb(167, 167, 167);
+  border-radius: 5px;
+}
+
+button {
+  width: 20.8rem;
+  height: 3.5rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: 1px solid rgb(167, 167, 167);
+  margin-top: 1rem;
+}
+
+#login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rem;
+}
+
+#no-account {
+  margin-top: 2rem;
+}
+
+#sign-up {
+  margin-left: 0.5rem;
+  text-decoration: underline;
+  font-weight: 500;
+  cursor: pointer;
 }
