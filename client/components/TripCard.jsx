@@ -17,30 +17,46 @@ const TripCard = props => {
       10: 'November',
       11: 'December'
     };
-    let dateStr = '';
-    const startDate = new Date(props.startDate);
-    const endDate = new Date(props.endDate);
 
-    if (startDate.getFullYear() === endDate.getFullYear()) {
-      if (startDate.getMonth() === endDate.getMonth()) {
-        // May 1-8, 2023
-        dateStr = monthNames[startDate.getMonth()]
-          + ' ' + startDate.getDate() + '-' + endDate.getDate()
-          + ', ' + startDate.getFullYear();
-      } else {
-        // May 1 - June 3, 2023
-        dateStr = monthNames[startDate.getMonth()] + ' '
-          + startDate.getDate() + ' - ' + monthNames[endDate.getMonth()]
-          + ' ' + endDate.getDate() + ', ' + startDate.getFullYear();
+    const getMonthAndDateStr = (targetDate) => {
+      let resultStr = '';
+      if (targetDate != null) {
+        resultStr = monthNames[targetDate.getMonth()] + ' ' + targetDate.getDate();
       }
-    } else {
-      // May 1, 2023 - June 3, 2024
-      dateStr = monthNames[startDate.getMonth()] + ' '
-        + startDate.getDate() + ', ' + startDate.getFullYear
-        + ' - ' + monthNames[endDate.getMonth()]
-        + ' ' + endDate.getDate() + ', ' + endDate.getFullYear();
+      return resultStr;
     }
 
+    let dateStr = '';
+    const startDate = props.startDate ? new Date(props.startDate) : null;
+    const endDate = props.endDate ? new Date(props.endDate) : null;
+    const startDateMonthDay = getMonthAndDateStr(startDate);
+    const endDateMonthDay = getMonthAndDateStr(endDate);
+
+    if (startDate === null && endDate === null) {
+      return dateStr;
+    } else {
+      if (startDate && endDate === null) {
+        dateStr = startDateMonthDay + ', ' + startDate.getFullYear() + ' - ';
+      } else if (startDate === null && endDate) {
+        dateStr = ' - ' + endDateMonthDay + ', ' + endDate.getFullYear();
+      } else {
+        if (startDate.getFullYear() === endDate.getFullYear()) {
+          if (startDate.getMonth() === endDate.getMonth()) {
+            // May 1-8, 2023
+            dateStr = startDateMonthDay + '-' + endDate.getDate()
+              + ', ' + startDate.getFullYear();
+          } else {
+            // May 1 - June 3, 2023
+            dateStr = startDateMonthDay + ' - '
+              + endDateMonthDay + ', ' + startDate.getFullYear();
+          }
+        } else {
+          // May 1, 2023 - June 3, 2024
+          dateStr = startDateMonthDay + ', ' + startDate.getFullYear
+            + ' - ' + endDateMonthDay + ', ' + endDate.getFullYear();
+        }
+      }
+    }
     return dateStr;
   }
 

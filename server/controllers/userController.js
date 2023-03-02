@@ -15,9 +15,6 @@ userController.verifyUser = async (req, res, next) => {
 	    AND password = $2
     `;
 
-    // TO DO - run additional query to get all of user's trips and store in res.locals
-
-
     try {
       const { rows } = await db.query(query, params);
       if (rows.length > 0) {

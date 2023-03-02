@@ -82,6 +82,46 @@ const App = () => {
 
   const onNewTripFinishClick = (newTripInfo) => {
     console.log('New Trip Finish button clicked!');
+    console.log(newTripInfo);
+    const tripName = newTripInfo.name;
+    const startDate = newTripInfo.startDate === '' ? null : newTripInfo.startDate;
+    const endDate = newTripInfo.endDate === '' ? null : newTripInfo.endDate;
+    const imageUrl = newTripInfo.imageUrl;
+    const userId = user.current.id;
+
+    const body = { userId, tripName, startDate, endDate, imageUrl };
+
+    fetch('/api/trip', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/JSON'
+      },
+      body: JSON.stringify(body)
+    })
+      .then(data => {
+        if (data.status === 200) {
+          console.log('hurray, trip was successfully created!');
+          getUserTrips(() => {
+            setShowWizard(false);
+          });
+        } else {
+          console.log('Create Trip fetch /api/trip: ERROR: ', data);
+        }
+      })
+      .catch(err => console.log('Create Trip fetch /api/trip: ERROR: ', err));
+  }
+
+  const getUserTrips = (nextFunc) => {
+    fetch(`/api/user/${user.current.id}/trip`, {
+      method: 'GET'
+    })
+      .then(data => data.json())
+      .then(data => {
+        console.log('Get Trips By User ID result: ', data);
+        user.current.trips = data;
+        nextFunc();
+      })
+      .catch(err => console.log('Get Trips by User ID fetch /api/user/{userId}/trip: ERROR: ', err));
   }
 
   let formToRender;
@@ -110,6 +150,10 @@ const App = () => {
     <div>
       <Header />
       {formToRender}
+      {/* <TripWizard
+        onCancelClick={onWizardCancelClick}
+        onFinishClick={onNewTripFinishClick}
+        userName='Nancy' /> */}
     </div >
   )
 };
