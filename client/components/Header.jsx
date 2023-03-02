@@ -4,7 +4,7 @@ const Header = () => {
 
   return (
     <div>
-      <span id="logo">vacation.io</span>
+      <span id="logo">Vacation Hero</span>
       {/* TO DO - add hamburger menu */}
     </div>
   );

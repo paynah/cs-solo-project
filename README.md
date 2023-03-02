@@ -1,4 +1,4 @@
-# vacation.io
+# Vacation Hero
 
 A vacation planning tool where you can organize all of your trip details in one location!
 

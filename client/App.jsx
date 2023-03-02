@@ -89,7 +89,8 @@ const App = () => {
     formToRender = showWizard ?
       <TripWizard
         onCancelClick={onWizardCancelClick}
-        onFinishClick={onNewTripFinishClick} />
+        onFinishClick={onNewTripFinishClick}
+        userName={user.current.name} />
       : <Main
         user={user.current}
         onStartNewTrip={onStartNewTripClick} />
@@ -109,9 +110,6 @@ const App = () => {
     <div>
       <Header />
       {formToRender}
-      {/* <TripWizard
-        onCancelClick={onWizardCancelClick}
-        onFinishClick={onNewTripFinishClick} /> */}
     </div >
   )
 };
