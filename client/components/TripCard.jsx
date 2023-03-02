@@ -47,7 +47,7 @@ const TripCard = props => {
   return (
     <div className="trip-card">
       <img className="trip-image"
-        src="https://www.exoticca.com/uk/magazine/wp-content/uploads/2019/05/The-12-most-spectacular-beaches-in-hawaii-that-you-cannot-miss.jpg" />
+        src={`${props.imageUrl}`} />
       <div className="trip-name">{props.tripName.toUpperCase()}</div>
       <div className="trip-dates">{buildDateStr()}</div>
     </div>

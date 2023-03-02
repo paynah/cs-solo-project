@@ -9,6 +9,7 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [showLoginError, setShowLoginError] = useState(false);
+  const [showWizard, setShowWizard] = useState(false);
   const user = useRef(null);
 
   const onLoginBtnClick = (email, password) => {
@@ -69,9 +70,29 @@ const App = () => {
       .catch(err => console.log('Create User fetch /api/user: ERROR: ', err));
   }
 
+  const onWizardCancelClick = () => {
+    console.log('Wizard Cancel option clicked!');
+    setShowWizard(false);
+  }
+
+  const onStartNewTripClick = () => {
+    console.log('Start New Trip button clicked!');
+    setShowWizard(true);
+  }
+
+  const onNewTripFinishClick = (newTripInfo) => {
+    console.log('New Trip Finish button clicked!');
+  }
+
   let formToRender;
   if (isLoggedIn) {
-    formToRender = <Main user={user.current} />
+    formToRender = showWizard ?
+      <TripWizard
+        onCancelClick={onWizardCancelClick}
+        onFinishClick={onNewTripFinishClick} />
+      : <Main
+        user={user.current}
+        onStartNewTrip={onStartNewTripClick} />
   } else {
     if (showSignup) {
       formToRender = <SignupForm
@@ -84,12 +105,13 @@ const App = () => {
     }
   }
 
-
   return (
     <div>
       <Header />
-      {/* {formToRender} */}
-      <TripWizard />
+      {formToRender}
+      {/* <TripWizard
+        onCancelClick={onWizardCancelClick}
+        onFinishClick={onNewTripFinishClick} /> */}
     </div >
   )
 };

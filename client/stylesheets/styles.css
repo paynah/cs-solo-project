@@ -14,9 +14,10 @@ input {
   border-radius: 5px;
 }
 
-input#trip-new-name {
+.trip-wizard-input {
   margin-top: 1rem;
   width: 30rem;
+  font-size: 1rem;
 }
 
 button {
@@ -114,6 +115,13 @@ h1 {
   height: fit-content;
 }
 
+#cancel-option {
+  font-size: 1.2rem;
+  color: #808080;
+  cursor: pointer;
+  margin-top: 5rem;
+}
+
 #logo {
   font-family: 'DM Serif Display', serif;
   font-size: 2rem;
@@ -164,4 +172,28 @@ h1 {
   font-size: 2rem;
   margin-top: 3rem;
   margin-left: 3rem;
+}
+
+#next-steps {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  width: 40%;
+}
+
+.next-step {
+  cursor: pointer;
+  margin-top: 4.3rem;
+  color: #303030;
+  font-weight: 500;
+  border: 1px solid #81a49b;
+  border-radius: 5px;
+  padding: 0.5rem;
+  background-color: #A3C4BC;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.next-step:hover {
+  background-color: #9bbdb5;
 }

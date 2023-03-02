@@ -29,15 +29,6 @@ userController.verifyUser = async (req, res, next) => {
           id: rows[0]._id, 
           name: rows[0].name
         };
-
-        // If we found a user, also query for their trips
-        params.splice(params.length);
-        params.push(res.locals.verifyUser.id);
-        query = `
-        SELECT _id AS TripId, name AS TripName, StartDate, EndDate
-        FROM Trip
-        WHERE UserID=$1
-        `;
       } else {
         console.log('UserController.verifyUser: User not found');
         res.locals.verifyUser = "User not found";
@@ -55,7 +46,7 @@ userController.verifyUser = async (req, res, next) => {
 userController.getUserTrips = async (req, res, next) => {
   const params = [res.locals.verifyUser.id];
   let query = `
-  SELECT _id AS TripId, name AS TripName, StartDate, EndDate
+  SELECT _id AS TripId, name AS TripName, StartDate, EndDate, ImageUrl
   FROM Trip
   WHERE UserID=$1
   `;
@@ -64,6 +55,7 @@ userController.getUserTrips = async (req, res, next) => {
     const { rows } = await db.query(query, params);
     if (rows.length > 0) {
       console.log(`UserController.getUserTrips: trips found!`);
+      console.log(rows);
     } else {
       console.log('UserController.getUserTrips: No trips found');
     }
