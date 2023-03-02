@@ -11,8 +11,19 @@ const Main = props => {
     }
   }
 
-  const followupMsg = props.user.trips.length > 0 ? 'It doesn\'t look like you have any trips currently planned!' : 'Select a trip below or start a new one!';
-
+  const followupMsg = props.user.trips.length > 0 ? 'Select a trip below or start a new one!' : 'It doesn\'t look like you have any trips currently planned!';
+  console.log(props.user.trips);
+  const trips = [];
+  for (let i = 0; i < props.user.trips.length; i++) {
+    const curTrip = props.user.trips[i];
+    trips.push(
+      <TripCard
+        key={curTrip.tripid}
+        endDate={curTrip.enddate}
+        startDate={curTrip.startdate}
+        tripName={curTrip.tripname}
+      />);
+  }
   return (
     <div>
       <div id="main-message">
@@ -21,9 +32,7 @@ const Main = props => {
         <button id="newTripBtn" onMouseOver={() => showConfetti()}>Start a New Trip!</button>
       </div>
       <div id="trips">
-        <TripCard />
-        <TripCard />
-        <TripCard />
+        {trips}
       </div>
     </div>
   );

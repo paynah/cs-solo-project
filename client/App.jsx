@@ -3,6 +3,7 @@ import LoginForm from './components/LoginForm.jsx';
 import Header from './components/Header.jsx';
 import SignupForm from './components/SignupForm.jsx';
 import Main from "./components/Main.jsx";
+import TripWizard from './components/TripWizard.jsx';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,6 +13,11 @@ const App = () => {
 
   const onLoginBtnClick = (email, password) => {
     console.log('Login button got clicked!');
+
+    if (!email.length || !password.length) {
+      setShowLoginError(true);
+      return;
+    }
 
     // Send a GET request to /api/user to find a user, given the input 'email' and 'password'
     const body = { email, password };
@@ -57,7 +63,7 @@ const App = () => {
       .then(response => {
         if (response.status === 200) {
           console.log('App.jsx: user was successfully created!')
-          // TO DO: render main component
+          onLoginBtnClick(email, password);
         }
       })
       .catch(err => console.log('Create User fetch /api/user: ERROR: ', err));
@@ -82,7 +88,8 @@ const App = () => {
   return (
     <div>
       <Header />
-      {formToRender}
+      {/* {formToRender} */}
+      <TripWizard />
     </div >
   )
 };
