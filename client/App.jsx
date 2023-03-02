@@ -2,12 +2,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import LoginForm from './components/LoginForm.jsx';
 import Header from './components/Header.jsx';
 import SignupForm from './components/SignupForm.jsx';
-import { Switch, Route } from 'react-router-dom';
+import Main from "./components/Main.jsx";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [showLoginError, setShowLoginError] = useState(false);
+  const user = useRef(null);
 
   const onLoginBtnClick = (email, password) => {
     console.log('Login button got clicked!');
@@ -27,6 +28,9 @@ const App = () => {
           setShowLoginError(true);
         } else {
           console.log('hurray, user is verified!', data);
+          setShowLoginError(false);
+          setIsLoggedIn(true);
+          user.current = data;
         }
       })
       .catch(err => console.log('Verify User fetch /api/user/login: ERROR: ', err));
@@ -53,21 +57,27 @@ const App = () => {
       .then(response => {
         if (response.status === 200) {
           console.log('App.jsx: user was successfully created!')
+          // TO DO: render main component
         }
       })
       .catch(err => console.log('Create User fetch /api/user: ERROR: ', err));
   }
 
   let formToRender;
-  if (showSignup) {
-    formToRender = <SignupForm
-      onSignupBtnClick={onSignupBtnClick} />
+  if (isLoggedIn) {
+    formToRender = <Main user={user.current} />
   } else {
-    formToRender = <LoginForm
-      onLoginBtnClick={onLoginBtnClick}
-      onSignupLinkClick={onSignupLinkClick}
-      showError={showLoginError} />
+    if (showSignup) {
+      formToRender = <SignupForm
+        onSignupBtnClick={onSignupBtnClick} />
+    } else {
+      formToRender = <LoginForm
+        onLoginBtnClick={onLoginBtnClick}
+        onSignupLinkClick={onSignupLinkClick}
+        showError={showLoginError} />
+    }
   }
+
 
   return (
     <div>

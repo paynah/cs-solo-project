@@ -7,7 +7,10 @@ router.post('/user', userController.createUser, (req, res) => {
   return res.status(200).send();
 });
 
-router.post('/user/login', userController.verifyUser, (req, res) => {
+router.post('/user/login', 
+  userController.verifyUser,
+  userController.getUserTrips, 
+  (req, res) => {
   return res.status(200).json(res.locals.verifyUser)
 });
 

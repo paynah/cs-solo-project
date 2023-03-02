@@ -24,6 +24,7 @@ button {
   border: 1px solid rgb(167, 167, 167);
   margin-top: 1rem;
   background-color: #A3C4BC;
+  cursor: pointer;
 }
 
 button#signupBtn {
@@ -32,6 +33,63 @@ button#signupBtn {
 
 h1 {
   margin-top: 4rem;
+}
+
+.trip-card {
+  width: 20rem;
+  height: 30rem;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 1.7rem;
+  margin-right: 1.7rem;
+  margin-top: 5rem;
+  border-radius: 6px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+.trip-card:hover {
+  transform: scale(1.02);
+}
+
+.trip-image {
+  width: 90%;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+}
+
+.trip-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #363636;
+}
+
+.trip-dates {
+  color: #767676;
+}
+
+.error-msg {
+  width: 20rem;
+  height: 2.5rem;
+  border: 1px solid #ba5353;
+  margin-top: -1.5rem;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #efbbbb;
+  color: #a40000;
+  margin-bottom: 3rem;
+}
+
+.error-msg#login-error-msg {
+  margin-top: 1.5rem;
+  margin-bottom: -0.5rem;
+  padding-bottom: 0px;
+  height: 2rem;
 }
 
 .signupLoginForm {
@@ -66,21 +124,28 @@ h1 {
   cursor: pointer;
 }
 
-.error-msg {
-  width: 20rem;
-  height: 2.5rem;
-  border: 1px solid #ba5353;
-  margin-top: -1.5rem;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: #efbbbb;
-  color: #a40000;
-  margin-bottom: 3rem;
+#main-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 2rem;
+  width: 40rem;
 }
 
-.error-msg#login-error-msg {
-  margin-top: 1.5rem;
-  margin-bottom: -0.5rem;
-  padding-bottom: 0px;
-  height: 2rem;
+#user-greeting-msg {
+  font-size: 3rem;
+  font-family: 'DM Serif Display', serif;
+}
+
+#user-followup-msg {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#trips {
+  display: flex;
+  justify-content: center;
 }
