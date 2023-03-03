@@ -4,12 +4,14 @@ import Header from './components/Header.jsx';
 import SignupForm from './components/SignupForm.jsx';
 import Main from "./components/Main.jsx";
 import TripWizard from './components/TripWizard.jsx';
+import Trip from './components/Trip.jsx';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [showLoginError, setShowLoginError] = useState(false);
   const [showWizard, setShowWizard] = useState(false);
+  const [showTrip, setShowTrip] = useState(false);
   const user = useRef(null);
 
   const onLoginBtnClick = (email, password) => {
@@ -35,9 +37,9 @@ const App = () => {
           setShowLoginError(true);
         } else {
           console.log('hurray, user is verified!', data);
+          user.current = data;
           setShowLoginError(false);
           setIsLoggedIn(true);
-          user.current = data;
         }
       })
       .catch(err => console.log('Verify User fetch /api/user/login: ERROR: ', err));
@@ -124,16 +126,27 @@ const App = () => {
       .catch(err => console.log('Get Trips by User ID fetch /api/user/{userId}/trip: ERROR: ', err));
   }
 
+  const onTripCardClick = (tripDetails) => {
+    console.log('APP JSX', tripDetails);
+    user.current.targetTrip = tripDetails;
+    setShowTrip(true);
+  }
+
   let formToRender;
   if (isLoggedIn) {
-    formToRender = showWizard ?
-      <TripWizard
+    if (showWizard) {
+      formToRender = <TripWizard
         onCancelClick={onWizardCancelClick}
         onFinishClick={onNewTripFinishClick}
         userName={user.current.name} />
-      : <Main
+    } else if (showTrip) {
+      formToRender = <Trip tripDetails={user.current.targetTrip} />
+    } else {
+      formToRender = <Main
         user={user.current}
-        onStartNewTrip={onStartNewTripClick} />
+        onStartNewTrip={onStartNewTripClick}
+        onTripCardClick={onTripCardClick} />
+    }
   } else {
     if (showSignup) {
       formToRender = <SignupForm
@@ -154,6 +167,7 @@ const App = () => {
         onCancelClick={onWizardCancelClick}
         onFinishClick={onNewTripFinishClick}
         userName='Nancy' /> */}
+      {/* <Trip /> */}
     </div >
   )
 };

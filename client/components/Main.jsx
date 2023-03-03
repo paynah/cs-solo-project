@@ -16,6 +16,7 @@ const Main = props => {
         startDate={curTrip.startdate}
         tripName={curTrip.tripname}
         imageUrl={curTrip.imageurl}
+        onTripCardClick={props.onTripCardClick}
       />);
   }
   return (

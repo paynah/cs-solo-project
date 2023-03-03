@@ -61,7 +61,7 @@ const TripCard = props => {
   }
 
   return (
-    <div className="trip-card">
+    <div className="trip-card" onClick={() => props.onTripCardClick(props)}>
       <img className="trip-image"
         src={`${props.imageUrl}`} />
       <div className="trip-name">{props.tripName.toUpperCase()}</div>
